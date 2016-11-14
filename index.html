@@ -1,1 +1,44 @@
-"My Page" 
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
+
+<script>
+
+var x = document.getElementById("demo");
+var googlemapsUrl = "";
+
+getLocation();
+
+function getLocation()
+{
+    if (navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else
+    { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position)
+{
+    x.innerHTML = "You are at:<br><br>" +
+                  "Latitude:<br>" + position.coords.latitude + 
+    "<br><br>Longitude:<br>" + position.coords.longitude;
+
+    googlemapsUrl = "https://www.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude;
+
+    x.innerHTML += "<br><br>";
+    x.innerHTML += "<a href='" + googlemapsUrl + "'>" + googlemapsUrl + "</a>";
+}
+
+</script>
+
+</body>
+
+</html>
