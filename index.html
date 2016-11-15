@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<H1>
 <p id="demo"></p>
 
-<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
+<button id="copyaddressbutton" class="copy-address-button">Copy GoogleMaps Link to Clipboard</button>
 
 <script>
+
+document.getElementById('copyaddressbutton').style.visibility='hidden';
 
 var x = document.getElementById("demo");
 var googlemapsUrl = "";
@@ -27,18 +29,49 @@ function getLocation()
 
 function showPosition(position)
 {
-    x.innerHTML = "You are at:<br><br>" +
-                  "Latitude:<br>" + position.coords.latitude + 
-    "<br><br>Longitude:<br>" + position.coords.longitude;
-
     googlemapsUrl = "https://www.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude;
+
+    x.innerHTML = "You are at:<br><br>" +
+    "Latitude:<br>" + position.coords.latitude + 
+    "<br><br>Longitude:<br>" + position.coords.longitude;
 
     x.innerHTML += "<br><br>";
     x.innerHTML += "<a href='" + googlemapsUrl + "'>" + googlemapsUrl + "</a>";
+
+    document.getElementById('copyaddressbutton').style.visibility='visible';
 }
 
-</script>
+function copyToClipboard(text)
+{
+    var textArea = document.createElement("textarea");
 
+    textArea.value = text;
+
+    document.body.appendChild(textArea);
+
+    textArea.select();
+
+    try
+    {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+    }
+    catch (err)
+    {
+        console.log('Oops, unable to copy');
+    }
+
+    document.body.removeChild(textArea);
+}
+
+
+var copyButton = document.querySelector('.copy-address-button');
+
+copyButton.addEventListener('click', function(event) { copyToClipboard(googlemapsUrl); });
+
+</script>
+</H1>
 </body>
 
 </html>
