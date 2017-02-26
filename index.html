@@ -30,6 +30,7 @@ function getLocation()
 function showPosition(position)
 {
     googlemapsUrl = "https://www.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude;
+    gymhuntrUrl = "https://gymhuntr.com/#" + position.coords.latitude + "," + position.coords.longitude;
 
     x.innerHTML = "You are at:<br><br>" +
     "Latitude:<br>" + position.coords.latitude + 
@@ -37,6 +38,9 @@ function showPosition(position)
 
     x.innerHTML += "<br><br>";
     x.innerHTML += "<a href='" + googlemapsUrl + "'>" + googlemapsUrl + "</a>";
+
+    x.innerHTML += "<br><br>";
+    x.innerHTML += "<a href='" + gymhuntrUrl + " (gymhuntr.com URL for Pokemon Go Players to see nearby gyms)'>" + gymhuntrUrl + "</a>";
 
     document.getElementById('copyaddressbutton').style.visibility='visible';
 }
